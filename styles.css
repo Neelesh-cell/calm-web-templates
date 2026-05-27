@@ -1,0 +1,293 @@
+/* OpenDyslexic Font from jsDelivr */
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('https://cdn.jsdelivr.net/npm/opendyslexic@0.9.3/woff/OpenDyslexic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* Sizing */
+    --base-font-size: 16px;
+    
+    /* Default (Light) Theme Colors */
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --text-muted: #495057;
+    --panel-bg: #ffffff;
+    --panel-border: #dee2e6;
+    --btn-bg: #e9ecef;
+    --btn-bg-hover: #ced4da;
+    --btn-text: #212529;
+    --btn-active-bg: #0d6efd;
+    --btn-active-text: #ffffff;
+    --card-bg: #ffffff;
+    --accent-color: #0d6efd;
+    --focus-color: #005fcc;
+    
+    /* Font */
+    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    /* Animation Speeds */
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #f8f9fa;
+    --text-muted: #adb5bd;
+    --panel-bg: #1e1e1e;
+    --panel-border: #333333;
+    --btn-bg: #2d2d2d;
+    --btn-bg-hover: #3d3d3d;
+    --btn-text: #f8f9fa;
+    --btn-active-bg: #0d6efd;
+    --btn-active-text: #ffffff;
+    --card-bg: #1e1e1e;
+    --accent-color: #6ea8fe;
+    --focus-color: #8bb9fe;
+}
+
+/* Dyslexic Font Override */
+.dyslexic-font {
+    --font-family: 'OpenDyslexic', system-ui, sans-serif;
+}
+
+/* Calm Mode Override - MUST BE !important to guarantee stop */
+.calm-mode *,
+.calm-mode *::before,
+.calm-mode *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+}
+
+html {
+    font-size: var(--base-font-size);
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+/* Typography */
+h1, h2, h3 {
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+kbd {
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    border: 1px solid var(--panel-border);
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9em;
+}
+
+/* Layout */
+.container {
+    max-width: 60rem; /* ~960px */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Accessibility Panel */
+.a11y-panel {
+    background-color: var(--panel-bg);
+    border-bottom: 2px solid var(--panel-border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.a11y-panel h2 {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+}
+
+.controls-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Buttons */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.control-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid transparent;
+    transition: all var(--transition-speed) ease;
+}
+
+.control-btn:hover {
+    background-color: var(--btn-bg-hover);
+}
+
+.control-btn[aria-pressed="true"] {
+    background-color: var(--btn-active-bg);
+    color: var(--btn-active-text);
+}
+
+.icon-btn {
+    padding: 0.5rem;
+    min-width: 2.5rem;
+    justify-content: center;
+}
+
+/* Font Size Control Group */
+.font-size-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--btn-bg);
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+}
+
+#font-size-display {
+    font-weight: 600;
+    min-width: 3.5rem;
+    text-align: center;
+}
+
+/* High Contrast Focus State */
+:focus-visible {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+}
+
+/* Content Area */
+main {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.hero {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+/* Cards Section */
+.demo-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--panel-border);
+    padding-bottom: 0.5rem;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+}
+
+/* Dummy Animations */
+.animated-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulsing-btn {
+    animation: pulse 2s infinite;
+}
+
+.action-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.action-btn:hover {
+    background-color: var(--focus-color);
+}
+
+.action-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent-color);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color var(--transition-speed) ease;
+}
+
+.action-link:hover {
+    border-color: var(--accent-color);
+}

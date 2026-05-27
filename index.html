@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Demo | Calm Web</title>
+    <meta name="description" content="A lightweight, fast demo showcasing WCAG AA/AAA accessibility standards and specific UI controls for neurodivergent individuals.">
+    <script>
+        // Render-blocking script to prevent flash of incorrect theme
+        (function() {
+            try {
+                var localTheme = localStorage.getItem('theme');
+                var sysTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                var theme = localTheme || sysTheme;
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                // Also restore other preferences to prevent jumps
+                var savedFontSize = localStorage.getItem('fontSize');
+                if (savedFontSize) {
+                    document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
+                }
+                
+                if (localStorage.getItem('calmMode') === 'true') {
+                    document.documentElement.classList.add('calm-mode');
+                }
+                
+                if (localStorage.getItem('dyslexicFont') === 'true') {
+                    document.documentElement.classList.add('dyslexic-font');
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="a11y-panel" aria-label="Accessibility Control Panel">
+        <div class="container">
+            <h2>Accessibility Controls</h2>
+            <div class="controls-grid">
+                <button id="theme-toggle" class="control-btn" aria-pressed="false">
+                    <span class="icon" aria-hidden="true">🌗</span>
+                    <span class="label">Dark Theme</span>
+                </button>
+                <button id="calm-toggle" class="control-btn" aria-pressed="false">
+                    <span class="icon" aria-hidden="true">⏸️</span>
+                    <span class="label">Calm Mode</span>
+                </button>
+                <button id="font-toggle" class="control-btn" aria-pressed="false">
+                    <span class="icon" aria-hidden="true">Ab</span>
+                    <span class="label">Dyslexia Font</span>
+                </button>
+                <div class="font-size-controls" role="group" aria-label="Font Size Adjustments">
+                    <button id="font-decrease" class="control-btn icon-btn" aria-label="Decrease Font Size">
+                        <span aria-hidden="true">A-</span>
+                    </button>
+                    <span id="font-size-display" aria-live="polite">100%</span>
+                    <button id="font-increase" class="control-btn icon-btn" aria-label="Increase Font Size">
+                        <span aria-hidden="true">A+</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Designing for Everyone</h1>
+            <p>This lightweight demonstration showcases strict WCAG AA/AAA standards with specific controls that empower users to adapt the interface to their needs.</p>
+        </section>
+
+        <section class="demo-content">
+            <h2>Interactive Demonstrations</h2>
+            <p>Below are elements that react to the accessibility settings above. Try toggling <strong>Calm Mode</strong> to see how animations behave, or adjust the <strong>text sizing</strong> to verify the layout scales gracefully.</p>
+            
+            <div class="cards">
+                <article class="card animated-hover">
+                    <h3>Focus Management</h3>
+                    <p>Navigate this page using the <kbd>Tab</kbd> key. Notice the prominent, high-contrast focus outlines ensuring you always know where you are.</p>
+                    <a href="#" class="action-link">Learn more</a>
+                </article>
+
+                <article class="card pulsing-card">
+                    <h3>Animation Control</h3>
+                    <p>This card features a subtle pulsing animation. For users with vestibular disorders, such movement can be distracting or nauseating. Toggle "Calm Mode" to pause it immediately.</p>
+                    <button class="action-btn pulsing-btn">Pulsing Button</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
