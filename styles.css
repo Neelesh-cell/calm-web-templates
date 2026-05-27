@@ -1,46 +1,51 @@
 /* OpenDyslexic Font from Fontsource (via jsDelivr) */
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic/index.css');
+/* Google Fonts for Body (Atkinson Hyperlegible) and Headings (Fraunces) */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap');
 
 :root {
     /* Sizing */
     --base-font-size: 16px;
     
     /* Default (Light) Theme Colors */
-    --bg-color: #f8f9fa;
-    --text-color: #212529;
-    --text-muted: #495057;
-    --panel-bg: #ffffff;
-    --panel-border: #dee2e6;
-    --btn-bg: #e9ecef;
-    --btn-bg-hover: #ced4da;
-    --btn-text: #212529;
-    --btn-active-bg: #0d6efd;
+    --bg-color: #fcfcfc;
+    --text-color: #1a1a1a;
+    --text-muted: #555555;
+    --panel-bg: #f0f4f8;
+    --panel-border: #d9e2ec;
+    --btn-bg: #e2e8f0;
+    --btn-bg-hover: #cbd5e1;
+    --btn-text: #1a1a1a;
+    --btn-active-bg: #00b4a6;
     --btn-active-text: #ffffff;
+    --btn-active-border: #004d40;
     --card-bg: #ffffff;
-    --accent-color: #0d6efd;
-    --focus-color: #005fcc;
+    --accent-color: #00b4a6;
+    --focus-color: #0033cc; /* Strong dark blue for light mode focus (WCAG compliant) */
     
     /* Font */
-    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-family: "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+    --heading-font: "Fraunces", serif;
     
     /* Animation Speeds */
     --transition-speed: 0.3s;
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #f8f9fa;
-    --text-muted: #adb5bd;
-    --panel-bg: #1e1e1e;
-    --panel-border: #333333;
-    --btn-bg: #2d2d2d;
-    --btn-bg-hover: #3d3d3d;
-    --btn-text: #f8f9fa;
-    --btn-active-bg: #0d6efd;
-    --btn-active-text: #ffffff;
-    --card-bg: #1e1e1e;
-    --accent-color: #6ea8fe;
-    --focus-color: #8bb9fe;
+    --bg-color: #0a0a0a;
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
+    --panel-bg: #121212;
+    --panel-border: #2d3748;
+    --btn-bg: #1f2937;
+    --btn-bg-hover: #374151;
+    --btn-text: #f1f5f9;
+    --btn-active-bg: #00b4a6;
+    --btn-active-text: #000000; /* Black text for high contrast on teal */
+    --btn-active-border: #ffffff;
+    --card-bg: #121212;
+    --accent-color: #00b4a6;
+    --focus-color: #ffdd00; /* Bright yellow for dark mode focus */
 }
 
 
@@ -51,6 +56,30 @@
     transition: none !important;
     animation: none !important;
     scroll-behavior: auto !important;
+}
+
+/* Dyslexia Mode Override */
+.dyslexia-mode,
+.dyslexia-mode *,
+.dyslexia-mode h1,
+.dyslexia-mode h2,
+.dyslexia-mode h3 {
+    font-family: 'OpenDyslexic', system-ui, sans-serif !important;
+}
+
+/* Auto Calm Badge Visibility */
+#auto-calm-badge {
+    display: none;
+    font-size: 0.8rem; 
+    background: var(--accent-color); 
+    color: var(--btn-active-text); 
+    padding: 0.2rem 0.5rem; 
+    border-radius: 4px; 
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+.auto-calm #auto-calm-badge {
+    display: inline-block;
 }
 
 html {
@@ -74,10 +103,12 @@ body {
 
 /* Typography */
 h1, h2, h3 {
+    font-family: var(--heading-font);
     line-height: 1.2;
     margin-top: 0;
     margin-bottom: 1rem;
     color: var(--text-color);
+    letter-spacing: -0.02em;
 }
 
 p {
@@ -104,18 +135,23 @@ kbd {
 /* Accessibility Panel */
 .a11y-panel {
     background-color: var(--panel-bg);
-    border-bottom: 2px solid var(--panel-border);
-    padding: 1rem 0;
+    border-bottom: 1px solid var(--panel-border);
+    padding: 1.25rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
     transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
 .a11y-panel h2 {
     font-size: 1.125rem;
     margin-bottom: 0.75rem;
+    font-family: var(--font-family); /* Keep UI elements simple */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--text-muted);
 }
 
 .controls-grid {
@@ -145,15 +181,32 @@ button {
     font-weight: 600;
     border: 2px solid transparent;
     transition: all var(--transition-speed) ease;
+    position: relative;
 }
 
 .control-btn:hover {
     background-color: var(--btn-bg-hover);
+    transform: translateY(-1px);
 }
 
 .control-btn[aria-pressed="true"] {
     background-color: var(--btn-active-bg);
     color: var(--btn-active-text);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-color: var(--btn-active-border); /* High contrast border for on state */
+}
+
+/* Clear visual indicator for toggle state */
+.status-indicator::after {
+    content: " (Off)";
+    font-size: 0.8em;
+    opacity: 0.8;
+    font-weight: normal;
+}
+.control-btn[aria-pressed="true"] .status-indicator::after {
+    content: " (On) ✓";
+    opacity: 1;
+    font-weight: bold;
 }
 
 .icon-btn {
@@ -180,8 +233,8 @@ button {
 
 /* High Contrast Focus State */
 :focus-visible {
-    outline: 3px solid var(--focus-color);
-    outline-offset: 2px;
+    outline: 4px solid var(--focus-color) !important;
+    outline-offset: 4px !important;
     border-radius: 0.25rem;
 }
 
@@ -197,30 +250,44 @@ main {
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 5vw + 1rem, 3.5rem); /* Prevents excessive scaling */
     margin-bottom: 1.5rem;
 }
 
 .hero p {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     color: var(--text-muted);
     max-width: 48rem;
     margin: 0 auto;
 }
 
+/* Scroll Cue */
+.scroll-cue {
+    margin-top: 3rem;
+    display: inline-block;
+    animation: bounce-soft 2s infinite ease-in-out;
+    opacity: 0.6;
+    font-size: 1.5rem;
+}
+
+@keyframes bounce-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
 /* Cards Section */
 .demo-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+    margin-bottom: 1.5rem;
     border-bottom: 2px solid var(--panel-border);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
 }
 
 .card {

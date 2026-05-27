@@ -15,7 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize State from inline script overrides (local storage / system pref)
     let currentTheme = rootElements.getAttribute('data-theme');
-    let isCalmMode = rootElements.classList.contains('calm-mode');
+    
+    let localCalmMode = localStorage.getItem('calmMode');
+    let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let isCalmMode = localCalmMode === 'true' || (prefersReducedMotion && localCalmMode !== 'false');
+    
     let isDyslexicFont = localStorage.getItem('dyslexicFont') === 'true';
     let currentFontSize = parseInt(localStorage.getItem('fontSize')) || DEFAULT_FONT_SIZE;
 
@@ -32,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateFontUI = () => {
         fontToggleBtn.setAttribute('aria-pressed', isDyslexicFont);
         if (isDyslexicFont) {
-            rootElements.style.setProperty('--font-family', "'OpenDyslexic', system-ui, sans-serif");
+            rootElements.classList.add('dyslexia-mode');
         } else {
-            rootElements.style.removeProperty('--font-family');
+            rootElements.classList.remove('dyslexia-mode');
         }
     };
 
@@ -69,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         localStorage.setItem('calmMode', isCalmMode);
         updateCalmUI();
+        rootElements.classList.remove('auto-calm'); // hide badge on manual interaction
     });
 
     fontToggleBtn.addEventListener('click', () => {
