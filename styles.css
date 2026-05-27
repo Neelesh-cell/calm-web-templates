@@ -1,11 +1,5 @@
-/* OpenDyslexic Font from jsDelivr */
-@font-face {
-  font-family: 'OpenDyslexic';
-  src: url('https://cdn.jsdelivr.net/npm/opendyslexic@3.0.3/woff/OpenDyslexic-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* OpenDyslexic Font from Fontsource (via jsDelivr) */
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic/index.css');
 
 :root {
     /* Sizing */
