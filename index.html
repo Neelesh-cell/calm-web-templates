@@ -25,7 +25,7 @@
                 }
                 
                 if (localStorage.getItem('dyslexicFont') === 'true') {
-                    document.documentElement.classList.add('dyslexic-font');
+                    document.documentElement.style.setProperty('--font-family', "'OpenDyslexic', system-ui, sans-serif");
                 }
             } catch (e) {}
         })();
@@ -81,8 +81,12 @@
 
                 <article class="card pulsing-card">
                     <h3>Animation Control</h3>
-                    <p>This card features a subtle pulsing animation. For users with vestibular disorders, such movement can be distracting or nauseating. Toggle "Calm Mode" to pause it immediately.</p>
-                    <button class="action-btn pulsing-btn">Pulsing Button</button>
+                    <p>These elements feature constant motion. For users with vestibular disorders, such movement can be distracting or nauseating. Toggle "Calm Mode" to pause them immediately.</p>
+                    <div class="animation-demo-box">
+                        <div class="spinner-element"></div>
+                        <div class="bouncing-element"></div>
+                        <button class="action-btn pulsing-btn">Pulsing Button</button>
+                    </div>
                 </article>
             </div>
         </section>

@@ -1,10 +1,10 @@
 /* OpenDyslexic Font from jsDelivr */
 @font-face {
-    font-family: 'OpenDyslexic';
-    src: url('https://cdn.jsdelivr.net/npm/opendyslexic@0.9.3/woff/OpenDyslexic-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/opendyslexic@3.0.3/woff/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -49,10 +49,6 @@
     --focus-color: #8bb9fe;
 }
 
-/* Dyslexic Font Override */
-.dyslexic-font {
-    --font-family: 'OpenDyslexic', system-ui, sans-serif;
-}
 
 /* Calm Mode Override - MUST BE !important to guarantee stop */
 .calm-mode *,
@@ -247,6 +243,41 @@ main {
 }
 
 /* Dummy Animations */
+.animation-demo-box {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spinner-element {
+    width: 3rem;
+    height: 3rem;
+    border: 6px solid var(--panel-border);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.bouncing-element {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--accent-color);
+    border-radius: 0.5rem;
+    animation: bounce 1s ease-in-out infinite;
+}
+
 .animated-hover:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);

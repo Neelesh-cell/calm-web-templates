@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize State from inline script overrides (local storage / system pref)
     let currentTheme = rootElements.getAttribute('data-theme');
     let isCalmMode = rootElements.classList.contains('calm-mode');
-    let isDyslexicFont = rootElements.classList.contains('dyslexic-font');
+    let isDyslexicFont = localStorage.getItem('dyslexicFont') === 'true';
     let currentFontSize = parseInt(localStorage.getItem('fontSize')) || DEFAULT_FONT_SIZE;
 
     // Initialize UI states
@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateFontUI = () => {
         fontToggleBtn.setAttribute('aria-pressed', isDyslexicFont);
+        if (isDyslexicFont) {
+            rootElements.style.setProperty('--font-family', "'OpenDyslexic', system-ui, sans-serif");
+        } else {
+            rootElements.style.removeProperty('--font-family');
+        }
     };
 
     const updateFontSizeUI = () => {
@@ -68,11 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fontToggleBtn.addEventListener('click', () => {
         isDyslexicFont = !isDyslexicFont;
-        if (isDyslexicFont) {
-            rootElements.classList.add('dyslexic-font');
-        } else {
-            rootElements.classList.remove('dyslexic-font');
-        }
         localStorage.setItem('dyslexicFont', isDyslexicFont);
         updateFontUI();
     });
